@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!--
+      THESIS: Gesunde Verpflegung wird als ein nahbarer, handverlesener Teil des Alltags gezeigt; keine generische Karten-Landingpage.
+      OWN-WORLD: Snäx Dunkelgrün, Salbei, Creme und Sand bilden weiche Flächen mit großzügiger, editorialer Typografie.
+      STORY: Angebot verstehen, Auswahlprinzipien kennenlernen und den Kontaktbereich erreichen.
+      FIRST VIEWPORT: Kompakter Anker-Header über einem großformatigen typografischen Hero mit direktem Weg zum Sortiment.
+      FORM: Editorial-organisch, in der Design-Diskussion als Option A gewählt; seed key outline-option-a.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+    -->
+    <noscript><span data-no-js-marker hidden></span></noscript>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 120" role="img" aria-labelledby="title desc">
+  <title id="title">Snäx</title>
+  <desc id="desc">Helle Snäx Wortmarke mit dem Leitsatz Simply Better Snacking.</desc>
+  <g fill="#f5f3ec">
+    <text x="3" y="78" font-family="Comfortaa, Avenir Next, sans-serif" font-size="105" font-weight="500" letter-spacing="-5">snä</text>
+    <g transform="translate(164 12) scale(.72)">
+      <path d="M47 47C22 48 11 35 12 12c23-1 36 10 35 35Zm-7-8C32 28 25 22 18 18c4 7 10 14 22 21Z" fill-rule="evenodd"/>
+      <path d="M53 47c-1-25 12-36 35-35 1 23-10 36-35 35Zm8-8c11-7 17-14 21-21-7 4-14 10-21 21Z" fill-rule="evenodd"/>
+      <path d="M47 53c1 25-12 36-35 35-1-23 10-36 35-35Zm-8 8c-11 7-17 14-21 21 7-4 14-10 21-21Z" fill-rule="evenodd"/>
+      <path d="M53 53c25-1 36 12 35 35-23 1-36-10-35-35Zm8 8c7 11 14 17 21 21-4-7-10-14-21-21Z" fill-rule="evenodd"/>
+    </g>
+    <text x="3" y="111" font-family="Nunito Sans, Avenir Next, sans-serif" font-size="11" font-weight="700" letter-spacing="4.3">SIMPLY BETTER SNACKING.</text>
+  </g>
+</svg>

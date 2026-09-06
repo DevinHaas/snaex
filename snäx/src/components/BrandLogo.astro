@@ -1,0 +1,27 @@
+---
+import logoDark from '../assets/brand/logo-dark.svg';
+import logoLight from '../assets/brand/logo-light.svg';
+import markDark from '../assets/brand/mark-dark.svg';
+import markLight from '../assets/brand/mark-light.svg';
+
+interface Props {
+  variant?: 'dark' | 'light';
+  lockup?: 'full' | 'mark';
+  class?: string;
+}
+
+const { variant = 'dark', lockup = 'full', class: className } = Astro.props;
+const sources = {
+  dark: { full: logoDark, mark: markDark },
+  light: { full: logoLight, mark: markLight },
+};
+const source = sources[variant][lockup];
+---
+
+<img
+  src={source.src}
+  width={source.width}
+  height={source.height}
+  class={className}
+  alt={lockup === 'full' ? 'Snäx – Simply Better Snacking.' : 'Snäx'}
+/>

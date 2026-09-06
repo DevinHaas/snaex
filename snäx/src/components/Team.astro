@@ -1,0 +1,39 @@
+---
+import type { SiteContent } from '../data/site';
+
+interface Props {
+  content: SiteContent['team'];
+}
+
+const { content } = Astro.props;
+---
+
+<section class="team section-shell" id="team" aria-labelledby="team-heading">
+  <header class="team-copy">
+    <p class="section-kicker">Die Menschen hinter Snäx</p>
+    <h2 id="team-heading">{content.heading}</h2>
+    <p>{content.intro}</p>
+  </header>
+
+  <ul class="team-list" aria-label="Unser Team">
+    {content.members.map((member, index) => (
+      <li class:list={['team-member', `team-member-${index + 1}`]}>
+        <figure>
+          <div class="team-portrait">
+            <img
+              src={member.image.src}
+              width={member.image.width}
+              height={member.image.height}
+              alt={member.alt}
+              loading="lazy"
+            />
+          </div>
+          <figcaption>
+            <strong>{member.name}</strong>
+            <span>{member.role}</span>
+          </figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+</section>

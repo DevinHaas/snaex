@@ -1,0 +1,22 @@
+---
+import type { ContactDetails } from '../data/site';
+import BrandLogo from './BrandLogo.astro';
+
+interface Props {
+  contactDetails: ContactDetails;
+}
+
+const { contactDetails } = Astro.props;
+const legalLinks = contactDetails.status === 'approved' ? contactDetails.legalLinks : [];
+---
+
+<footer class="site-footer">
+  <a class="footer-brand" href="#hero" aria-label="Snäx Startseite">
+    <BrandLogo variant="light" class="footer-logo" />
+  </a>
+  <p>Snäx · Simply Better Snacking.</p>
+  <nav aria-label="Fußnavigation">
+    {legalLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    <a href="#seitenanfang">Nach oben</a>
+  </nav>
+</footer>

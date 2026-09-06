@@ -1,0 +1,39 @@
+---
+import type { SiteContent } from '../data/site';
+import BrandLogo from './BrandLogo.astro';
+
+interface Props {
+  content: SiteContent['contact'];
+}
+
+const { content } = Astro.props;
+---
+
+<section
+  class="contact section-shell"
+  id="kontakt"
+  aria-labelledby="contact-heading"
+  data-contact-status={content.details.status}
+>
+  <BrandLogo variant="light" lockup="mark" class="contact-mark" />
+  <div class="contact-copy">
+    <p class="section-kicker">Kontakt</p>
+    <h2 id="contact-heading">{content.heading}</h2>
+    <p>{content.intro}</p>
+  </div>
+
+  {content.details.status === 'approved' ? (
+    <div class="contact-actions">
+      <a class="contact-action" href={content.details.emailHref}>
+        {content.details.ctaLabel}
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a class="contact-email" href={content.details.emailHref}>{content.details.email}</a>
+      {content.details.phoneHref && content.details.phoneDisplay && (
+        <a class="contact-phone" href={content.details.phoneHref}>{content.details.phoneDisplay}</a>
+      )}
+    </div>
+  ) : (
+    <p class="contact-pending">Kontaktangaben folgen nach Freigabe.</p>
+  )}
+</section>

@@ -1,0 +1,18 @@
+---
+import type { SiteContent } from '../data/site';
+
+interface Props {
+  content: SiteContent['philosophy'];
+}
+
+const { content } = Astro.props;
+---
+
+<section class="philosophy section-shell" id="philosophie" aria-labelledby="philosophy-heading">
+  <p class="section-kicker">Unsere Philosophie</p>
+  <h2 id="philosophy-heading">{content.heading}</h2>
+  <blockquote>{content.statement}</blockquote>
+  <ul class="principle-list" aria-label="Unsere Prinzipien">
+    {content.principles.map((principle) => <li>{principle}</li>)}
+  </ul>
+</section>

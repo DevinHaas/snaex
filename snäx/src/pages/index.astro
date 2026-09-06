@@ -1,8 +1,11 @@
 ---
-import BrandLogo from '../components/BrandLogo.astro';
+import Contact from '../components/Contact.astro';
 import Hero from '../components/Hero.astro';
+import Philosophy from '../components/Philosophy.astro';
 import Products from '../components/Products.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import Team from '../components/Team.astro';
 import { siteContent } from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
@@ -16,43 +19,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <main id="inhalt" tabindex="-1">
     <Hero content={siteContent.hero} />
     <Products content={siteContent.products} />
-
-    <section class="philosophy section-shell" id="philosophie" aria-labelledby="philosophy-heading">
-      <h2 id="philosophy-heading">{siteContent.philosophy.heading}</h2>
-      <blockquote>{siteContent.philosophy.statement}</blockquote>
-      <ul class="principle-list" aria-label="Unsere Prinzipien">
-        {siteContent.philosophy.principles.map((principle) => <li>{principle}</li>)}
-      </ul>
-    </section>
-
-    <section class="team section-shell" id="team" aria-labelledby="team-heading">
-      <div class="team-visual" aria-hidden="true">
-        <span class="portrait portrait-one"></span>
-        <span class="portrait portrait-two"></span>
-        <span class="portrait portrait-three"><BrandLogo lockup="mark" /></span>
-      </div>
-      <div class="team-copy">
-        <h2 id="team-heading">{siteContent.team.heading}</h2>
-        <p>{siteContent.team.intro}</p>
-      </div>
-    </section>
-
-    <section class="contact section-shell" id="kontakt" aria-labelledby="contact-heading">
-      <BrandLogo variant="light" lockup="mark" class="contact-mark" />
-      <div>
-        <h2 id="contact-heading">{siteContent.contact.heading}</h2>
-        <p>{siteContent.contact.intro}</p>
-      </div>
-      <a class="contact-action" href="#seitenanfang">
-        {siteContent.contact.ctaLabel}
-        <span aria-hidden="true">↑</span>
-      </a>
-    </section>
+    <Philosophy content={siteContent.philosophy} />
+    <Team content={siteContent.team} />
+    <Contact content={siteContent.contact} />
   </main>
-
-  <footer class="site-footer">
-    <BrandLogo class="footer-logo" />
-    <p>Snäx · Simply Better Snacking.</p>
-    <a href="#seitenanfang">Nach oben</a>
-  </footer>
+  <SiteFooter contactDetails={siteContent.contact.details} />
 </BaseLayout>

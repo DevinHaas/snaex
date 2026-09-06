@@ -1,7 +1,40 @@
+import type { ImageMetadata } from 'astro';
+
+import devinPortrait from '../assets/team/devin-placeholder.svg';
+import janMoserPortrait from '../assets/team/jan-moser-placeholder.svg';
+
 export interface NavigationItem {
   label: string;
   href: `#${string}`;
 }
+
+export interface TeamMember {
+  name: string;
+  role: string;
+  image: ImageMetadata;
+  alt: string;
+}
+
+export interface LegalLink {
+  label: string;
+  href: string;
+}
+
+export interface ApprovedContactDetails {
+  status: 'approved';
+  email: string;
+  emailHref: `mailto:${string}`;
+  phoneDisplay?: string;
+  phoneHref?: `tel:${string}`;
+  ctaLabel: string;
+  legalLinks: LegalLink[];
+}
+
+export interface PendingContactDetails {
+  status: 'pending';
+}
+
+export type ContactDetails = ApprovedContactDetails | PendingContactDetails;
 
 export interface SiteContent {
   navigation: NavigationItem[];
@@ -25,11 +58,12 @@ export interface SiteContent {
   team: {
     heading: string;
     intro: string;
+    members: TeamMember[];
   };
   contact: {
     heading: string;
     intro: string;
-    ctaLabel: string;
+    details: ContactDetails;
   };
 }
 
@@ -62,13 +96,31 @@ export const siteContent: SiteContent = {
   },
   team: {
     heading: 'Persönlich ausgewählt. Persönlich betreut.',
-    intro:
-      'Hier lernst du bald die Menschen kennen, die Snäx aufbauen, Produkte auswählen und Automaten betreuen. Namen, Rollen und Porträts folgen nach Freigabe.',
+    intro: 'Devin Hasler und Jan Moser haben Snäx gemeinsam gegründet.',
+    members: [
+      {
+        name: 'Devin Hasler',
+        role: 'Mitgründer und Software Developer',
+        image: devinPortrait,
+        alt: 'Porträt von Devin Hasler',
+      },
+      {
+        name: 'Jan Moser',
+        role: 'Mitgründer',
+        image: janMoserPortrait,
+        alt: 'Porträt von Jan Moser',
+      },
+    ],
   },
   contact: {
     heading: 'Lust auf bessere Pausen?',
-    intro:
-      'Du möchtest Snäx an deinem Standort? Die geprüften Kontaktangaben werden ergänzt, sobald sie freigegeben sind.',
-    ctaLabel: 'Kontaktbereich vormerken',
+    intro: 'Du möchtest Snäx an deinem Standort oder mehr über unser Angebot erfahren? Wir freuen uns auf deine Nachricht.',
+    details: {
+      status: 'approved',
+      email: 'info@snäx.you',
+      emailHref: 'mailto:info@xn--snx-rla.you',
+      ctaLabel: 'Schreib uns',
+      legalLinks: [],
+    },
   },
 };

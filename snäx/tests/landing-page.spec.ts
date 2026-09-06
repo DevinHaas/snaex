@@ -66,3 +66,45 @@ test('offer connects the hero, assortment categories, and contact section', asyn
   await expect(page).toHaveURL(/#kontakt$/);
   await expect(page.locator('#kontakt')).toBeInViewport();
 });
+
+test('contact exposes the approved email without phone or legal links', async ({ page }) => {
+  await page.goto('/');
+
+  const contact = page.locator('#kontakt');
+  await expect(contact).toHaveAttribute('data-contact-status', 'approved');
+  await expect(contact.getByText('info@snäx.you')).toBeVisible();
+  await expect(contact.getByRole('link', { name: 'Schreib uns' })).toHaveAttribute(
+    'href',
+    'mailto:info@xn--snx-rla.you',
+  );
+  await expect(contact.getByRole('link', { name: 'info@snäx.you' })).toHaveAttribute(
+    'href',
+    'mailto:info@xn--snx-rla.you',
+  );
+  await expect(contact.locator('a[href^="tel:"]')).toHaveCount(0);
+  await expect(page.locator('.site-footer a[href^="http"]')).toHaveCount(0);
+});
+
+test('content structure exposes ordered sections, landmarks, team alternatives, and footer navigation', async ({
+  page,
+}) => {
+  await page.goto('/');
+
+  await expect(page.locator('h1')).toHaveCount(1);
+  await expect(page.getByRole('banner')).toHaveCount(1);
+  await expect(page.locator('main')).toHaveCount(1);
+  await expect(page.locator('footer')).toHaveCount(1);
+
+  const sectionHeadings = page.locator('main > section > h2, main > section header > h2, main > section div > h2');
+  await expect(sectionHeadings).toHaveText([
+    'Was passt heute zu deiner Pause?',
+    'Einfach besser snacken.',
+    'Persönlich ausgewählt. Persönlich betreut.',
+    'Lust auf bessere Pausen?',
+  ]);
+
+  await expect(page.getByRole('img', { name: 'Porträt von Devin Hasler' })).toBeVisible();
+  await expect(page.getByRole('img', { name: 'Porträt von Jan Moser' })).toBeVisible();
+  await expect(page.getByRole('navigation', { name: 'Fußnavigation' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Nach oben' })).toHaveAttribute('href', '#seitenanfang');
+});

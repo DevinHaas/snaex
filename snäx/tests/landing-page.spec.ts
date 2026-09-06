@@ -6,8 +6,8 @@ test('navigation works by keyboard and native anchors without JavaScript', async
   await expect(page.locator('[data-no-js-marker]')).toHaveCount(1);
 
   const sections = [
-    ['hero', 'Gute Snacks gehören näher an den Alltag.'],
-    ['produkte', 'Eine Auswahl, die mehr kann als satt machen.'],
+    ['hero', 'Der Automat, der bessere Pausen möglich macht.'],
+    ['produkte', 'Was passt heute zu deiner Pause?'],
     ['philosophie', 'Einfach besser snacken.'],
     ['team', 'Persönlich ausgewählt. Persönlich betreut.'],
     ['kontakt', 'Lust auf bessere Pausen?'],
@@ -48,4 +48,21 @@ test('navigation works by keyboard and native anchors without JavaScript', async
     await expect(page.locator(`#${id}`)).toBeVisible();
     await expect(page.locator(`#${id}`)).toBeInViewport();
   }
+});
+
+test('offer connects the hero, assortment categories, and contact section', async ({ page }) => {
+  await page.goto('/');
+
+  await page.getByRole('link', { name: 'Sortiment entdecken' }).click();
+  await expect(page).toHaveURL(/#produkte$/);
+
+  const products = page.locator('[data-product-category]');
+  await expect(products).toHaveCount(4);
+  for (const category of ['protein', 'getraenk', 'low-carb', 'snack']) {
+    await expect(page.locator(`[data-product-category="${category}"]`)).toHaveCount(1);
+  }
+
+  await page.getByRole('link', { name: 'Snäx für deinen Standort' }).click();
+  await expect(page).toHaveURL(/#kontakt$/);
+  await expect(page.locator('#kontakt')).toBeInViewport();
 });

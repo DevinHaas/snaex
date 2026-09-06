@@ -14,7 +14,7 @@
     "preview": "astro preview",
     "test": "bun test",
     "test:e2e": "playwright test",
-    "verify": "bun run check && bun run build && bun run test:e2e"
+    "verify": "bun run test && bun run check && bun run build && bun run test:e2e"
   },
   "dependencies": {
     "@fontsource-variable/comfortaa": "^5.2.8",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@playwright/test": "^1.55.0",
+    "@types/bun": "^1.4.1",
     "@types/node": "^26.4.1",
     "typescript": "^5.9.2"
   }

@@ -10,6 +10,7 @@ export interface SiteContent {
     heading: string;
     intro: string;
     ctaLabel: string;
+    valueCues: string[];
   };
   products: {
     heading: string;
@@ -40,16 +41,17 @@ export const siteContent: SiteContent = {
     { label: 'Kontakt', href: '#kontakt' },
   ],
   hero: {
-    eyebrow: 'Gesund. Lokal. Griffbereit.',
-    heading: 'Gute Snacks gehören näher an den Alltag.',
+    eyebrow: 'Gesund. Lokal. Jederzeit griffbereit.',
+    heading: 'Der Automat, der bessere Pausen möglich macht.',
     intro:
-      'Snäx bringt eine handverlesene Auswahl in den Automaten – mit Blick auf gute Zutaten, faire Preise und kurze Wege.',
+      'Snäx bringt handverlesene Produkte dorthin, wo dein Alltag stattfindet – mit guten Zutaten, fairen Preisen und einem klaren Fokus auf Schweizer Herkunft.',
     ctaLabel: 'Sortiment entdecken',
+    valueCues: ['handverlesen', 'gesund', 'frisch', 'natürlich', 'persönlich'],
   },
   products: {
-    heading: 'Eine Auswahl, die mehr kann als satt machen.',
+    heading: 'Was passt heute zu deiner Pause?',
     intro:
-      'Unser Sortiment wird sorgfältig geprüft und bewusst vielseitig zusammengestellt. Die konkreten Produkte folgen nach der Recherche und Freigabe.',
+      'Protein für lange Tage, etwas Kühles gegen den Durst, Low-Carb für zwischendurch und vertraute Schweizer Snacks: bewusst gemischt statt beliebig gefüllt.',
     categories: ['Protein', 'Getränke', 'Low Carb', 'Snacks'],
   },
   philosophy: {

@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+
+import { productCategoryLabels, type Product } from '../data/products';
+
+interface Props {
+  product: Product;
+  index: number;
+}
+
+const { product, index } = Astro.props;
+---
+
+<article class="product-card" data-product-category={product.category}>
+  <div class={`product-visual product-visual-${index + 1}`}>
+    <Image
+      src={product.image}
+      alt={product.imageAlt}
+      widths={[320, 480, 640]}
+      sizes="(max-width: 42rem) 80vw, (max-width: 64rem) 42vw, 22vw"
+      loading="lazy"
+    />
+  </div>
+  <div class="product-copy">
+    <p class="product-category">{productCategoryLabels[product.category]}</p>
+    <h3>{product.name}</h3>
+    <p>{product.ingredientsSummary}</p>
+    <ul class="product-facts" aria-label={`Produktmerkmale von ${product.name}`}>
+      {product.nutritionClaims.map((claim) => <li>{claim.label}</li>)}
+    </ul>
+    <div class="product-meta">
+      <a href={product.originSourceUrl} rel="noreferrer">Hergestellt in der Schweiz</a>
+      <a href={product.factSourceUrl} rel="noreferrer">Faktenquelle</a>
+    </div>
+  </div>
+</article>

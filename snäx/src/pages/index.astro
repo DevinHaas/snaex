@@ -1,5 +1,7 @@
 ---
 import BrandLogo from '../components/BrandLogo.astro';
+import Hero from '../components/Hero.astro';
+import Products from '../components/Products.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { siteContent } from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -12,40 +14,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <SiteHeader navigation={siteContent.navigation} />
 
   <main id="inhalt" tabindex="-1">
-    <section class="hero section-shell" id="hero" aria-labelledby="hero-heading">
-      <div class="hero-copy">
-        <p class="eyebrow">{siteContent.hero.eyebrow}</p>
-        <h1 id="hero-heading">{siteContent.hero.heading}</h1>
-        <p class="hero-intro">{siteContent.hero.intro}</p>
-        <a class="primary-action" href="#produkte">
-          {siteContent.hero.ctaLabel}
-          <span class="action-mark" aria-hidden="true">↓</span>
-        </a>
-      </div>
-
-      <div class="hero-stage" aria-hidden="true">
-        <div class="hero-word">snäx</div>
-        <div class="machine">
-          <span class="machine-light"></span>
-          <span class="machine-window"></span>
-          <span class="machine-slot"></span>
-          <BrandLogo variant="light" lockup="mark" class="machine-mark" />
-        </div>
-        <span class="orbit orbit-one">frisch</span>
-        <span class="orbit orbit-two">nah</span>
-      </div>
-    </section>
-
-    <section class="products section-shell" id="produkte" aria-labelledby="products-heading">
-      <div class="section-heading">
-        <h2 id="products-heading">{siteContent.products.heading}</h2>
-        <p>{siteContent.products.intro}</p>
-      </div>
-      <ul class="category-list" aria-label="Geplante Sortimentskategorien">
-        {siteContent.products.categories.map((category) => <li>{category}</li>)}
-      </ul>
-      <p class="status-note">Sortiment in Recherche · Veröffentlichung nach Freigabe</p>
-    </section>
+    <Hero content={siteContent.hero} />
+    <Products content={siteContent.products} />
 
     <section class="philosophy section-shell" id="philosophie" aria-labelledby="philosophy-heading">
       <h2 id="philosophy-heading">{siteContent.philosophy.heading}</h2>

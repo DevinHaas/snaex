@@ -1,5 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
+import appenzellerSparkling from '../assets/catalog/appenzeller-sparkling.webp';
+import appenzellerStill from '../assets/catalog/appenzeller-still.webp';
 import barebellsCaramelChoco from '../assets/catalog/barebells-caramel-choco.webp';
 import blevitaSesam from '../assets/catalog/blevita-sesam.webp';
 import chiefsCrispyCookie from '../assets/catalog/chiefs-crispy-cookie.webp';
@@ -42,8 +44,10 @@ export const catalogProducts: CatalogProduct[] = [
   { name: 'Jack Link’s Beef Jerky Original', unit: '25 g', category: 'protein', image: jackLinksBeefJerky, imageAlt: 'Packung Jack Link’s Beef Jerky Original' },
   { name: 'Valser Still', unit: '500 ml PET-Flasche', category: 'getraenk', image: valserStill, imageAlt: 'Flasche Valser Still Mineralwasser' },
   { name: 'Coca-Cola Zero', unit: '500 ml PET-Flasche', category: 'getraenk', image: cocaColaZero, imageAlt: 'Flasche Coca-Cola Zero Zucker' },
+  { name: 'Appenzeller Mineralwasser mit Kohlensäure', unit: '500 ml PET-Flasche', category: 'getraenk', image: appenzellerSparkling, imageAlt: 'Flasche Appenzeller Mineralwasser mit Kohlensäure' },
   { name: 'Rivella Rot', unit: '500 ml PET-Flasche', category: 'getraenk', image: rivellaRot, imageAlt: 'Flasche Rivella Rot' },
   { name: 'Rivella Blau / Zero', unit: '500 ml PET-Flasche', category: 'getraenk', image: rivellaBlau, imageAlt: 'Flasche Rivella Blau' },
+  { name: 'Appenzeller Mineralwasser ohne Kohlensäure', unit: '500 ml PET-Flasche', category: 'getraenk', image: appenzellerStill, imageAlt: 'Flasche Appenzeller Mineralwasser ohne Kohlensäure' },
   { name: 'Migros Kult Ice Tea Zitrone Zero', unit: '500 ml Flasche', category: 'getraenk', image: kultIceTeaZitroneZero, imageAlt: 'Flasche Migros Kult Ice Tea Zitrone Zero' },
   { name: 'Valser Prickelnd Minze', unit: '500 ml PET-Flasche', category: 'getraenk', image: valserPrickelndMinze, imageAlt: 'Flasche Valser Prickelnd Minze' },
   { name: 'Valser Prickelnd', unit: '500 ml PET-Flasche', category: 'getraenk', image: valserPrickelnd, imageAlt: 'Flasche Valser Prickelnd Mineralwasser' },

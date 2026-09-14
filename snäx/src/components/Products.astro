@@ -1,10 +1,6 @@
 ---
 import type { SiteContent } from '../data/site';
-import {
-  productCategories,
-  productCategoryLabels,
-  publishedProducts,
-} from '../data/products';
+import { publishedProducts } from '../data/products';
 import ProductCard from './ProductCard.astro';
 
 interface Props {
@@ -19,13 +15,9 @@ const { content } = Astro.props;
     <h2 id="products-heading">{content.heading}</h2>
     <div>
       <p>{content.intro}</p>
-      <a class="text-action" href="#kontakt">Snäx für deinen Standort <span aria-hidden="true">↘</span></a>
+      <a class="text-action" href="/produkte/">Ganzes Sortiment durchsuchen <span aria-hidden="true">↘</span></a>
     </div>
   </div>
-
-  <ul class="category-list" aria-label="Sortimentskategorien">
-    {productCategories.map((category) => <li>{productCategoryLabels[category]}</li>)}
-  </ul>
 
   <ul class="product-list" aria-label="Ausgewähltes Snäx Sortiment">
     {publishedProducts.map((product, index) => (

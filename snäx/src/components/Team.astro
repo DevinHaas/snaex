@@ -17,7 +17,7 @@ const { content } = Astro.props;
 
   <ul class="team-list" aria-label="Unser Team">
     {content.members.map((member, index) => (
-      <li class:list={['team-member', `team-member-${index + 1}`]}>
+      <li class:list={['team-member', `team-member-${index + 1}`]} data-motion="team-member">
         <figure>
           <div class="team-portrait">
             <img

@@ -6,8 +6,8 @@ test('opens the full assortment and filters its four categories', async ({ page 
   await expect(page).toHaveURL(/\/produkte\/$/);
   await expect(page.getByRole('heading', { name: 'Finde deinen nächsten Snäx.' })).toBeVisible();
   await expect(page.locator('[data-catalog-group]')).toHaveCount(4);
-  await expect(page.locator('[data-catalog-item]')).toHaveCount(25);
-  await expect(page.locator('[data-catalog-item] img')).toHaveCount(25);
+  await expect(page.locator('[data-catalog-item]')).toHaveCount(23);
+  await expect(page.locator('[data-catalog-item] img')).toHaveCount(23);
 
   if (testInfo.project.name === 'chromium-no-js') return;
 

@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+
+import gesundeFette from '../assets/categories/gesunde-fette.webp';
+import hydration from '../assets/categories/hydration.webp';
+import kohlenhydrate from '../assets/categories/kohlenhydrate.webp';
+import protein from '../assets/categories/protein.webp';
+import type { SiteContent } from '../data/site';
+
+interface Props {
+  content: SiteContent['categoryGuide'];
+}
+
+const { content } = Astro.props;
+const symbols = [protein, kohlenhydrate, gesundeFette, hydration];
+---
+
+<section class="category-guide section-shell" id="kategorien" aria-labelledby="category-guide-heading">
+  <header class="category-guide-heading">
+    <div>
+      <p class="section-kicker">{content.eyebrow}</p>
+      <h2 id="category-guide-heading">{content.heading}</h2>
+    </div>
+    <p>{content.intro}</p>
+  </header>
+
+  <ul class="category-guide-list">
+    {content.categories.map((category, index) => (
+      <li data-assortment-category={category.slug}>
+        <Image
+          class="category-symbol"
+          src={symbols[index]}
+          alt=""
+          widths={[180, 360]}
+          sizes="(max-width: 42rem) 10rem, 11.25rem"
+          loading="lazy"
+        />
+        <h3>{category.name}</h3>
+        <p class="category-benefit">{category.benefit}</p>
+        <p class="category-description">{category.description}</p>
+      </li>
+    ))}
+  </ul>
+</section>

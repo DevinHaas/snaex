@@ -1,51 +1,38 @@
 ---
-import { Image } from 'astro:assets';
-
 import type { SiteContent } from '../data/site';
-import { publishedProducts } from '../data/products';
-import BrandLogo from './BrandLogo.astro';
 
 interface Props {
   content: SiteContent['hero'];
 }
 
 const { content } = Astro.props;
-const heroProducts = publishedProducts.slice(0, 3);
 ---
 
 <section class="hero section-shell" id="hero" aria-labelledby="hero-heading">
-  <div class="hero-copy">
-    <p class="hero-claim">{content.eyebrow}</p>
+  <div class="hero-copy" data-motion="hero-copy">
     <h1 id="hero-heading">{content.heading}</h1>
     <p class="hero-intro">{content.intro}</p>
-    <ul class="value-cues" aria-label="Was Snäx auszeichnet">
-      {content.valueCues.map((cue) => <li>{cue}</li>)}
-    </ul>
-    <a class="primary-action" href="#produkte">
-      {content.ctaLabel}
-      <span class="action-mark" aria-hidden="true">↓</span>
-    </a>
+    <div class="hero-actions">
+      <a class="primary-action" href="/beratung">
+        Snack-Finder starten
+        <span class="action-mark" aria-hidden="true">↗</span>
+      </a>
+      <a class="secondary-action" href="#produkte">{content.ctaLabel}</a>
+    </div>
   </div>
 
-  <div class="hero-stage" aria-hidden="true">
+  <div class="hero-stage" aria-hidden="true" data-motion="hero-stage">
     <span class="hero-word">besser snacken</span>
-    <div class="machine">
-      <span class="machine-light"></span>
-      <span class="machine-window"></span>
-      <span class="machine-slot"></span>
-      <BrandLogo variant="light" lockup="mark" class="machine-mark" />
-    </div>
-    {heroProducts.map((product, index) => (
-      <Image
-        class={`hero-product hero-product-${index + 1}`}
-        src={product.image}
-        alt=""
-        widths={[240, 360, 480]}
-        sizes="(max-width: 42rem) 9rem, 13rem"
-        loading={index === 0 ? 'eager' : 'lazy'}
-      />
-    ))}
-    <span class="orbit orbit-one">frisch</span>
-    <span class="orbit orbit-two">nah</span>
+    <img
+      class="hero-machine"
+      data-motion="hero-machine"
+      src="/vendor.webp"
+      alt=""
+      width="1883"
+      height="2423"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
   </div>
 </section>

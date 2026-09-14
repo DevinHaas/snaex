@@ -3,6 +3,7 @@ dist/
 node_modules/
 playwright-report/
 test-results/
+.humanlayer/
 .env
 .env.production
 .DS_Store

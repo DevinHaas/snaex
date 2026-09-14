@@ -1,8 +1,5 @@
 import type { ImageMetadata } from 'astro';
 
-import devinPortrait from '../assets/team/devin-placeholder.svg';
-import janMoserPortrait from '../assets/team/jan-moser-placeholder.svg';
-
 export interface NavigationItem {
   label: string;
   href: `#${string}`;
@@ -39,16 +36,24 @@ export type ContactDetails = ApprovedContactDetails | PendingContactDetails;
 export interface SiteContent {
   navigation: NavigationItem[];
   hero: {
-    eyebrow: string;
     heading: string;
     intro: string;
     ctaLabel: string;
-    valueCues: string[];
   };
   products: {
     heading: string;
     intro: string;
-    categories: string[];
+  };
+  categoryGuide: {
+    eyebrow: string;
+    heading: string;
+    intro: string;
+    categories: Array<{
+      slug: 'protein' | 'kohlenhydrate' | 'gesunde-fette' | 'hydration';
+      name: string;
+      benefit: string;
+      description: string;
+    }>;
   };
   philosophy: {
     heading: string;
@@ -70,23 +75,57 @@ export interface SiteContent {
 export const siteContent: SiteContent = {
   navigation: [
     { label: 'Produkte', href: '#produkte' },
+    { label: 'Kategorien', href: '#kategorien' },
     { label: 'Philosophie', href: '#philosophie' },
     { label: 'Unser Team', href: '#team' },
     { label: 'Kontakt', href: '#kontakt' },
   ],
   hero: {
-    eyebrow: 'Gesund. Lokal. Jederzeit griffbereit.',
     heading: 'Der Automat, der bessere Pausen möglich macht.',
     intro:
       'Snäx bringt handverlesene Produkte dorthin, wo dein Alltag stattfindet – mit guten Zutaten, fairen Preisen und einem klaren Fokus auf Schweizer Herkunft.',
     ctaLabel: 'Sortiment entdecken',
-    valueCues: ['handverlesen', 'gesund', 'frisch', 'natürlich', 'persönlich'],
   },
   products: {
     heading: 'Was passt heute zu deiner Pause?',
     intro:
       'Protein für lange Tage, etwas Kühles gegen den Durst, Low-Carb für zwischendurch und vertraute Schweizer Snacks: bewusst gemischt statt beliebig gefüllt.',
-    categories: ['Protein', 'Getränke', 'Low Carb', 'Snacks'],
+  },
+  categoryGuide: {
+    eyebrow: 'Unser Kategoriensystem',
+    heading: 'Vier Kategorien. Klar ausgewählt.',
+    intro:
+      'Damit du im Automaten schneller findest, was gerade zu deinem Tag passt, ordnen wir jedes Produkt nach seinem wichtigsten Beitrag ein.',
+    categories: [
+      {
+        slug: 'protein',
+        name: 'Protein',
+        benefit: 'Aufbauen. Regenerieren. Leisten.',
+        description:
+          'Unterstützt den Muskelaufbau, fördert die Regeneration und sorgt für ein langanhaltendes Sättigungsgefühl.',
+      },
+      {
+        slug: 'kohlenhydrate',
+        name: 'Kohlenhydrate',
+        benefit: 'Energie. Fokus. Weiterkommen.',
+        description:
+          'Liefern schnell verfügbare Energie für den Alltag und deine Aktivität.',
+      },
+      {
+        slug: 'gesunde-fette',
+        name: 'Gesunde Fette',
+        benefit: 'Nähren. Ausgleichen. Wohlfühlen.',
+        description:
+          'Liefern wertvolle Fettsäuren und unterstützen wichtige Körperfunktionen.',
+      },
+      {
+        slug: 'hydration',
+        name: 'Hydration',
+        benefit: 'Trinken. Fokussieren. Dranbleiben.',
+        description:
+          'Unterstützt den Flüssigkeitshaushalt und hilft dir, konzentriert und leistungsfähig zu bleiben.',
+      },
+    ],
   },
   philosophy: {
     heading: 'Einfach besser snacken.',
@@ -101,13 +140,13 @@ export const siteContent: SiteContent = {
       {
         name: 'Devin Hasler',
         role: 'Mitgründer und Software Developer',
-        image: devinPortrait,
+        image: { src: '/founders/devin.webp', width: 1200, height: 1200, format: 'webp' },
         alt: 'Porträt von Devin Hasler',
       },
       {
         name: 'Jan Moser',
         role: 'Mitgründer',
-        image: janMoserPortrait,
+        image: { src: '/founders/jan.webp', width: 739, height: 1600, format: 'webp' },
         alt: 'Porträt von Jan Moser',
       },
     ],
@@ -117,8 +156,8 @@ export const siteContent: SiteContent = {
     intro: 'Du möchtest Snäx an deinem Standort oder mehr über unser Angebot erfahren? Wir freuen uns auf deine Nachricht.',
     details: {
       status: 'approved',
-      email: 'info@snäx.you',
-      emailHref: 'mailto:info@xn--snx-rla.you',
+      email: 'info@snax.you',
+      emailHref: 'mailto:info@snax.you',
       ctaLabel: 'Schreib uns',
       legalLinks: [],
     },

@@ -1,5 +1,6 @@
 ---
 import Contact from '../components/Contact.astro';
+import CategoryGuide from '../components/CategoryGuide.astro';
 import Hero from '../components/Hero.astro';
 import Philosophy from '../components/Philosophy.astro';
 import Products from '../components/Products.astro';
@@ -19,9 +20,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <main id="inhalt" tabindex="-1">
     <Hero content={siteContent.hero} />
     <Products content={siteContent.products} />
+    <CategoryGuide content={siteContent.categoryGuide} />
     <Philosophy content={siteContent.philosophy} />
     <Team content={siteContent.team} />
     <Contact content={siteContent.contact} />
   </main>
   <SiteFooter contactDetails={siteContent.contact.details} />
 </BaseLayout>
+
+<script>
+  import '../scripts/motion';
+</script>

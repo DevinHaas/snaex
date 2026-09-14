@@ -4,14 +4,15 @@ import BrandLogo from './BrandLogo.astro';
 
 interface Props {
   contactDetails: ContactDetails;
+  linkPrefix?: '' | '/';
 }
 
-const { contactDetails } = Astro.props;
+const { contactDetails, linkPrefix = '' } = Astro.props;
 const legalLinks = contactDetails.status === 'approved' ? contactDetails.legalLinks : [];
 ---
 
 <footer class="site-footer">
-  <a class="footer-brand" href="#hero" aria-label="Snäx Startseite">
+  <a class="footer-brand" href={`${linkPrefix}#hero`} aria-label="Snäx Startseite">
     <BrandLogo variant="light" class="footer-logo" />
   </a>
   <p>Snäx · Simply Better Snacking.</p>

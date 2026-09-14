@@ -11,7 +11,7 @@ interface Props {
 const { product, index } = Astro.props;
 ---
 
-<article class="product-card" data-product-category={product.category}>
+<article class="product-card" data-product-category={product.category} data-motion="product-card">
   <div class={`product-visual product-visual-${index + 1}`}>
     <Image
       src={product.image}
@@ -19,6 +19,7 @@ const { product, index } = Astro.props;
       widths={[320, 480, 640]}
       sizes="(max-width: 42rem) 80vw, (max-width: 64rem) 42vw, 22vw"
       loading="lazy"
+      data-motion="product-image"
     />
   </div>
   <div class="product-copy">

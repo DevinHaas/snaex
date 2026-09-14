@@ -4,7 +4,6 @@ import barebellsCaramelChoco from '../assets/catalog/barebells-caramel-choco.web
 import blevitaSesam from '../assets/catalog/blevita-sesam.webp';
 import chiefsCrispyCookie from '../assets/catalog/chiefs-crispy-cookie.webp';
 import chiefsProteinChipsSourCream from '../assets/catalog/chiefs-protein-chips-sour-cream.webp';
-import cocaColaClassic from '../assets/catalog/coca-cola-classic.webp';
 import cocaColaZero from '../assets/catalog/coca-cola-zero.webp';
 import darvidaDinkel from '../assets/catalog/darvida-dinkel.webp';
 import darvidaNature from '../assets/catalog/darvida-nature.webp';
@@ -13,7 +12,6 @@ import focuswaterShine from '../assets/catalog/focuswater-shine.webp';
 import jackLinksBeefJerky from '../assets/catalog/jack-links-beef-jerky.webp';
 import kaegiChiefsProteinWafer from '../assets/catalog/kaegi-chiefs-protein-wafer.webp';
 import kaegiFretOriginal from '../assets/catalog/kaegi-fret-original.webp';
-import kultIceTeaZitrone from '../assets/catalog/kult-ice-tea-zitrone.webp';
 import kultIceTeaZitroneZero from '../assets/catalog/kult-ice-tea-zitrone-zero.webp';
 import naturaplanNutMix from '../assets/catalog/naturaplan-nut-mix.webp';
 import ovoSport from '../assets/catalog/ovo-sport.webp';
@@ -44,10 +42,8 @@ export const catalogProducts: CatalogProduct[] = [
   { name: 'Jack Link’s Beef Jerky Original', unit: '25 g', category: 'protein', image: jackLinksBeefJerky, imageAlt: 'Packung Jack Link’s Beef Jerky Original' },
   { name: 'Valser Still', unit: '500 ml PET-Flasche', category: 'getraenk', image: valserStill, imageAlt: 'Flasche Valser Still Mineralwasser' },
   { name: 'Coca-Cola Zero', unit: '500 ml PET-Flasche', category: 'getraenk', image: cocaColaZero, imageAlt: 'Flasche Coca-Cola Zero Zucker' },
-  { name: 'Coca-Cola Classic', unit: '500 ml PET-Flasche', category: 'getraenk', image: cocaColaClassic, imageAlt: 'Flasche Coca-Cola Original Taste' },
   { name: 'Rivella Rot', unit: '500 ml PET-Flasche', category: 'getraenk', image: rivellaRot, imageAlt: 'Flasche Rivella Rot' },
   { name: 'Rivella Blau / Zero', unit: '500 ml PET-Flasche', category: 'getraenk', image: rivellaBlau, imageAlt: 'Flasche Rivella Blau' },
-  { name: 'Migros Kult Ice Tea Zitrone', unit: '500 ml Flasche', category: 'getraenk', image: kultIceTeaZitrone, imageAlt: 'Flasche Migros Kult Ice Tea Zitrone' },
   { name: 'Migros Kult Ice Tea Zitrone Zero', unit: '500 ml Flasche', category: 'getraenk', image: kultIceTeaZitroneZero, imageAlt: 'Flasche Migros Kult Ice Tea Zitrone Zero' },
   { name: 'Valser Prickelnd Minze', unit: '500 ml PET-Flasche', category: 'getraenk', image: valserPrickelndMinze, imageAlt: 'Flasche Valser Prickelnd Minze' },
   { name: 'Valser Prickelnd', unit: '500 ml PET-Flasche', category: 'getraenk', image: valserPrickelnd, imageAlt: 'Flasche Valser Prickelnd Mineralwasser' },

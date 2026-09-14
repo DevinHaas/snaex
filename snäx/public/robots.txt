@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://snax.you/sitemap-index.xml

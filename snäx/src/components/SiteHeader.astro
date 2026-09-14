@@ -1,25 +1,32 @@
 ---
 import type { NavigationItem } from '../data/site';
-import BrandLogo from './BrandLogo.astro';
+import logo from '../assets/brand/logo.png';
 
 interface Props {
   navigation: NavigationItem[];
+  linkPrefix?: '' | '/';
 }
 
-const { navigation } = Astro.props;
+const { navigation, linkPrefix = '' } = Astro.props;
 ---
 
 <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 <header class="site-header" id="seitenanfang">
-  <a class="brand-link" href="#hero" aria-label="Snäx Startseite">
-    <BrandLogo class="header-logo" />
+  <a class="brand-link" href={`${linkPrefix}#hero`} aria-label="Snäx Startseite">
+    <img
+      src={logo.src}
+      width={logo.width}
+      height={logo.height}
+      class="header-logo"
+      alt="Snäx – Simply Better Snacking."
+    />
   </a>
   <nav aria-label="Hauptnavigation">
     <ul class="nav-list">
       {navigation.map((item) => (
-        <li><a href={item.href}>{item.label}</a></li>
+        <li><a href={`${linkPrefix}${item.href}`}>{item.label}</a></li>
       ))}
     </ul>
   </nav>
-  <a class="header-action" href="#kontakt">Snäx anfragen <span aria-hidden="true">↘</span></a>
+  <a class="header-action" href={`${linkPrefix}#kontakt`}>Snäx anfragen <span aria-hidden="true">↘</span></a>
 </header>

@@ -1,0 +1,435 @@
+---
+import { Image } from 'astro:assets';
+
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { catalogProducts } from '../data/catalog';
+import {
+  productCategories,
+  productCategoryLabels,
+} from '../data/products';
+import { siteContent } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const productsByCategory = productCategories.map((category) => ({
+  category,
+  products: catalogProducts.filter((product) => product.category === category),
+}));
+---
+
+<BaseLayout
+  title="Produkte durchsuchen | Snäx"
+  description="Durchsuche das aktuelle Snäx Sortiment und filtere Produkte nach Protein, Getränk, Low Carb oder Snack."
+>
+  <SiteHeader navigation={siteContent.navigation} linkPrefix="/" />
+
+  <main class="catalog section-shell" id="inhalt" tabindex="-1">
+    <header class="catalog-intro">
+      <h1>Finde deinen nächsten Snäx.</h1>
+      <p>
+        Durchsuche alle 25 Produkte oder wähle eine Kategorie. Jedes Produkt ist dort
+        eingeordnet, wo es im Automaten am schnellsten zu finden ist.
+      </p>
+    </header>
+
+    <form class="catalog-controls" data-catalog-controls role="search">
+      <label for="product-search">Produkte durchsuchen</label>
+      <div class="search-field">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
+          <path d="m21 21-4.3-4.3m2.3-5.2a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path>
+        </svg>
+        <input
+          id="product-search"
+          type="search"
+          name="q"
+          placeholder="Name, Zutat oder Merkmal"
+          autocomplete="off"
+          data-product-search
+        />
+      </div>
+
+      <fieldset>
+        <legend>Nach Kategorie filtern</legend>
+        <div class="filter-list">
+          <button type="button" aria-pressed="true" data-category-filter="all">
+            Alle <span>{catalogProducts.length}</span>
+          </button>
+          {productsByCategory.map(({ category, products }) => (
+            <button type="button" aria-pressed="false" data-category-filter={category}>
+              {productCategoryLabels[category]} <span>{products.length}</span>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+      <p class="catalog-status" aria-live="polite" data-catalog-status>
+        {catalogProducts.length} Produkte
+      </p>
+    </form>
+
+    <div class="catalog-groups">
+      {productsByCategory.map(({ category, products }) => (
+        <section class="catalog-group" data-catalog-group={category} aria-labelledby={`category-${category}`}>
+          <header>
+            <h2 id={`category-${category}`}>{productCategoryLabels[category]}</h2>
+            <span>{products.length} {products.length === 1 ? 'Produkt' : 'Produkte'}</span>
+          </header>
+          <ul class="catalog-grid">
+            {products.map((product) => {
+              const searchText = [
+                product.name,
+                productCategoryLabels[product.category],
+                product.unit,
+              ].join(' ');
+
+              return (
+                <li
+                  data-catalog-item
+                  data-category={product.category}
+                  data-search={searchText}
+                >
+                  <article class="catalog-item">
+                    <div class="catalog-image">
+                      <Image
+                        class="catalog-packshot"
+                        src={product.image}
+                        alt={product.imageAlt}
+                        widths={[240, 400]}
+                        sizes="(max-width: 42rem) 7rem, 10rem"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="catalog-copy">
+                      <p class="product-category">{productCategoryLabels[product.category]}</p>
+                      <h3>{product.name}</h3>
+                      <p>{product.unit}</p>
+                    </div>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <p class="catalog-empty" data-catalog-empty hidden>
+      Kein Produkt passt zu deiner Suche. Versuche einen anderen Begriff oder zeige alle Kategorien.
+    </p>
+  </main>
+
+  <SiteFooter contactDetails={siteContent.contact.details} linkPrefix="/" />
+</BaseLayout>
+
+<script>
+  const controls = document.querySelector<HTMLFormElement>('[data-catalog-controls]');
+  const search = document.querySelector<HTMLInputElement>('[data-product-search]');
+  const status = document.querySelector<HTMLElement>('[data-catalog-status]');
+  const empty = document.querySelector<HTMLElement>('[data-catalog-empty]');
+  const items = [...document.querySelectorAll<HTMLElement>('[data-catalog-item]')];
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-catalog-group]')];
+  const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-category-filter]')];
+  let activeCategory = 'all';
+
+  const normalize = (value: string) => value.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase('de-CH');
+
+  const updateResults = () => {
+    const query = normalize(search?.value.trim() ?? '');
+    let visibleCount = 0;
+
+    for (const item of items) {
+      const matchesCategory = activeCategory === 'all' || item.dataset.category === activeCategory;
+      const matchesSearch = normalize(item.dataset.search ?? '').includes(query);
+      item.hidden = !(matchesCategory && matchesSearch);
+      if (!item.hidden) visibleCount += 1;
+    }
+
+    for (const group of groups) {
+      group.hidden = !group.querySelector('[data-catalog-item]:not([hidden])');
+    }
+
+    if (status) status.textContent = `${visibleCount} ${visibleCount === 1 ? 'Produkt' : 'Produkte'} gefunden`;
+    if (empty) empty.hidden = visibleCount !== 0;
+  };
+
+  controls?.addEventListener('submit', (event) => event.preventDefault());
+  search?.addEventListener('input', updateResults);
+
+  for (const filter of filters) {
+    filter.addEventListener('click', () => {
+      activeCategory = filter.dataset.categoryFilter ?? 'all';
+      for (const button of filters) button.setAttribute('aria-pressed', String(button === filter));
+      updateResults();
+    });
+  }
+</script>
+
+<style>
+  .catalog {
+    padding-block: clamp(4rem, 9vw, 8rem) var(--section-gap);
+  }
+
+  .catalog-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+    align-items: end;
+    gap: clamp(2rem, 6vw, 7rem);
+  }
+
+  .catalog-intro h1 {
+    max-width: 11ch;
+  }
+
+  .catalog-intro p {
+    max-width: 52ch;
+    margin: 0;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  }
+
+  .catalog-controls {
+    display: grid;
+    grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.5fr) auto;
+    align-items: end;
+    gap: 1rem clamp(1rem, 3vw, 2rem);
+    margin-block: clamp(3rem, 7vw, 6rem);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    background: var(--color-sage);
+    border-radius: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .catalog-controls > label,
+  .catalog-controls legend {
+    font-weight: 900;
+  }
+
+  .catalog-controls > label {
+    grid-column: 1;
+    align-self: end;
+  }
+
+  .search-field {
+    position: relative;
+    grid-column: 1;
+  }
+
+  .search-field svg {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 1.8;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .search-field input {
+    width: 100%;
+    min-height: 3.5rem;
+    padding: 0.8rem 1rem 0.8rem 3.25rem;
+    color: var(--color-ink);
+    background: var(--color-canvas);
+    border: 1px solid rgb(31 61 42 / 35%);
+    border-radius: 999px;
+    font: inherit;
+    font-size: 1rem;
+  }
+
+  .catalog-controls fieldset {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    gap: 0.65rem;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .filter-list button {
+    min-height: 3rem;
+    padding: 0.6rem 0.85rem;
+    color: var(--color-ink);
+    background: transparent;
+    border: 1px solid rgb(31 61 42 / 42%);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .filter-list button[aria-pressed='true'] {
+    color: var(--color-canvas);
+    background: var(--color-ink);
+  }
+
+  .filter-list span {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.35rem;
+    min-height: 1.35rem;
+    margin-left: 0.25rem;
+    color: var(--color-ink);
+    background: var(--color-canvas);
+    border-radius: 999px;
+    font-size: 0.72rem;
+  }
+
+  .catalog-status {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    margin: 0 0 0.9rem;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .catalog-groups {
+    display: grid;
+    gap: clamp(5rem, 10vw, 9rem);
+  }
+
+  .catalog-group > header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(31 61 42 / 28%);
+  }
+
+  .catalog-group h2 {
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+  }
+
+  .catalog-group > header span {
+    font-weight: 800;
+  }
+
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(1.5rem, 4vw, 4rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .catalog-grid > li {
+    border-top: 1px solid rgb(31 61 42 / 28%);
+  }
+
+  .catalog-item {
+    display: grid;
+    grid-template-columns: clamp(7.5rem, 13vw, 10rem) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2rem);
+    min-height: 13rem;
+    padding-block: 1.5rem 2rem;
+  }
+
+  .catalog-image {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 1;
+    padding: 0.75rem;
+    overflow: hidden;
+    background: var(--color-surface);
+    border-radius: 1.5rem;
+  }
+
+  :global(.catalog-packshot) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+    filter: drop-shadow(0 0.7rem 0.7rem rgb(31 61 42 / 15%));
+  }
+
+  .catalog-copy {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: 0.7rem;
+  }
+
+  .catalog-copy h3 {
+    max-width: 25ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    font-weight: 650;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .catalog-copy > p:last-child {
+    margin: 0;
+    font-weight: 800;
+  }
+
+  .catalog-empty {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem);
+    background: var(--color-surface);
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  @media (max-width: 64rem) {
+    .catalog-intro,
+    .catalog-controls {
+      grid-template-columns: 1fr;
+    }
+
+    .catalog-controls > label,
+    .search-field,
+    .catalog-controls fieldset,
+    .catalog-status {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .catalog-status {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .catalog {
+      padding-top: 3.5rem;
+    }
+
+    .catalog-intro {
+      align-items: start;
+    }
+
+    .catalog-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .catalog-item {
+      grid-template-columns: 7rem minmax(0, 1fr);
+      min-height: 10rem;
+      padding-block: 1.25rem;
+    }
+
+    .catalog-image {
+      border-radius: 1.25rem;
+    }
+  }
+</style>

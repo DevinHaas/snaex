@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snäx — product image review</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f5f3ec; color: #1f3d2a; font: 16px/1.5 system-ui, sans-serif; }
+    main { max-width: 1400px; margin: auto; padding: 32px 24px; }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 48px); letter-spacing: -.04em; }
+    h2 { font-size: 20px; margin: 0 0 8px; }
+    p { margin: 8px 0 16px; }
+    a { color: inherit; text-underline-offset: 3px; }
+    a:focus-visible, input:focus-visible { outline: 3px solid #b96100; outline-offset: 4px; }
+    .intro { max-width: 850px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; margin-top: 24px; }
+    article { background: white; border: 1px solid #d9ded5; border-radius: 12px; overflow: hidden; }
+    .stage { height: 360px; display: flex; align-items: center; justify-content: center; padding: 16px; background: white; }
+    .stage img { display: block; max-width: 100%; max-height: 320px; width: auto; height: auto; object-fit: contain; }
+    .stage .water { max-width: 122px; }
+    .copy { padding: 20px; border-top: 1px solid #d9ded5; }
+    .meta { color: #52604f; font-size: 14px; }
+    .tag { display: inline-block; margin-bottom: 10px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .limited { color: #865000; }
+    .missing { color: #913b2c; }
+    .placeholder { border: 2px dashed #acb5a6; padding: 24px; text-align: center; max-width: 220px; }
+    #cream:checked ~ .grid .stage { background: #f5f3ec; }
+    #dark:checked ~ .grid .stage { background: #1f3d2a; }
+    #dark:checked ~ .grid .placeholder { color: white; }
+    label { margin-right: 14px; }
+    footer { margin-top: 30px; font-size: 14px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Snäx product image review</h1>
+  <p class="intro">Five high-resolution selections, two smaller official bottle images, one missing packshot. These are original brand files, visually reviewed on 14 September 2026. No packaging has been generated or altered.</p>
+  <p class="intro">Research preview only. Exact supplied wrappers and commercial reuse permissions still need confirmation. <a href="README.md">Read quality limits, source links and outstanding checks.</a></p>
+  <p>Preview the original backgrounds and transparency:</p>
+  <input type="radio" name="background" id="white" checked><label for="white">White</label>
+  <input type="radio" name="background" id="cream"><label for="cream">Cream</label>
+  <input type="radio" name="background" id="dark"><label for="dark">Dark green</label>
+  <section class="grid" aria-label="Eight researched products">
+    <article>
+      <div class="stage"><img class="water" src="originals/valser-still.png" width="244" height="800" alt="Current VALSER Still bottle with grey cap and black mountain label"></div>
+      <div class="copy"><span class="tag limited">H1 · Card size only</span><h2>Valser Still</h2><p class="meta">244 × 800 · transparent PNG · official 2026 artwork</p><p>Keep under 122 × 400 CSS px at 2×. Match the delivered 500 ml bottle and label generation.</p><a href="originals/valser-still.png">Open original image</a></div>
+    </article>
+    <article>
+      <div class="stage"><img class="water" src="originals/valser-prickelnd.png" width="244" height="800" alt="Current green VALSER Prickelnd bottle with black mountain label"></div>
+      <div class="copy"><span class="tag limited">H2 · Card size only</span><h2>Valser Prickelnd</h2><p class="meta">244 × 800 · transparent PNG · official 2026 artwork</p><p>Keep under 122 × 400 CSS px at 2×. Larger master needed for hero placement.</p><a href="originals/valser-prickelnd.png">Open original image</a></div>
+    </article>
+    <article>
+      <div class="stage"><img src="originals/focuswater-shine-500ml.png" width="1600" height="1600" alt="FOCUSWATER Shine lemon and passionfruit bottle with yellow cap"></div>
+      <div class="copy"><span class="tag">H3 · High-resolution selection</span><h2>FOCUSWATER Shine</h2><p class="meta">1600 × 1600 · transparent PNG · official brand source</p><p>Correct single bottle and flavour. Original shadow and wide transparent margins retained.</p><a href="originals/focuswater-shine-500ml.png">Open original image</a></div>
+    </article>
+    <article>
+      <div class="stage"><div class="placeholder">Exact 50 g packshot still needed<br>Coop article 7124958</div></div>
+      <div class="copy"><span class="tag missing">H4 · No accepted image</span><h2>Naturaplan nut mix</h2><p class="meta">Roasted &amp; salted · 50 g</p><p>No substitute image. Request the original front-facing 50 g pack from Coop.</p><a href="https://www.coop.ch/de/lebensmittel/suesses-snacks/chips-snacks/gesalzene-nuesse/nussmischungen/naturaplan-fsi-nussmischung-geroestet-gesalzen/p/7124958">Exact product source</a></div>
+    </article>
+    <article>
+      <div class="stage"><img src="originals/darvida-nature.png" width="2362" height="1772" alt="Blue and white DAR-VIDA Nature wrapper from the manufacturer"></div>
+      <div class="copy"><span class="tag">H5 · High-resolution selection</span><h2>DAR-VIDA Nature</h2><p class="meta">2362 × 1772 · transparent PNG · HUG / DAR-VIDA</p><p>Sharp official artwork. Confirm the depicted wrapper matches the 41.6 g vending pocket.</p><a href="originals/darvida-nature.png">Open original image</a></div>
+    </article>
+    <article>
+      <div class="stage"><img src="originals/darvida-dinkel.png" width="2362" height="1772" alt="Green DAR-VIDA Dinkel Épeautre wrapper carrying Coop Naturaplan branding"></div>
+      <div class="copy"><span class="tag">H6 · High-resolution selection</span><h2>DAR-VIDA Dinkel</h2><p class="meta">2362 × 1772 · transparent PNG · HUG / DAR-VIDA</p><p>Correct Dinkel artwork with genuine Coop branding. Confirm the 41.5 g pocket wrapper.</p><a href="originals/darvida-dinkel.png">Open original image</a></div>
+    </article>
+    <article>
+      <div class="stage"><img src="originals/quix-unsalted-50g.jpg" width="1920" height="1920" alt="Blue QUIX Power nuts unsalted wrapper with visible 50 g marking"></div>
+      <div class="copy"><span class="tag">H7 · High-resolution selection</span><h2>QUIX unsalted nuts</h2><p class="meta">1920 × 1920 · white JPEG · Nectaflor article 51031</p><p>Exact 50 g wrapper. Use on white cards; the product remains conditional in the nutrition research.</p><a href="originals/quix-unsalted-50g.jpg">Open original image</a></div>
+    </article>
+    <article>
+      <div class="stage"><img src="originals/quix-peanuts-50g.jpg" width="1920" height="1920" alt="Red QUIX roasted salted peanuts wrapper with visible 50 g marking"></div>
+      <div class="copy"><span class="tag">H8 · High-resolution selection</span><h2>QUIX salted peanuts</h2><p class="meta">1920 × 1920 · white JPEG · Nectaflor article 51021</p><p>Exact 50 g wrapper. Clean original photo; nutritional approval remains conditional.</p><a href="originals/quix-peanuts-50g.jpg">Open original image</a></div>
+    </article>
+  </section>
+  <footer>Local review only · Seven unmodified files · No third-party scripts, remote image loading or website changes</footer>
+</main>
+</body>
+</html>

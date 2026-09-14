@@ -1,10 +1,22 @@
 import { describe, expect, test } from 'bun:test';
 
+import { catalogProducts } from './catalog';
 import {
   getPublicationErrors,
   productCategories,
   publishedProducts,
 } from './products';
+
+describe('full product catalog', () => {
+  test('contains all 25 researched products in the four assortment categories', () => {
+    expect(catalogProducts).toHaveLength(25);
+    expect(catalogProducts.every((product) => product.image && product.imageAlt.length > 0)).toBe(true);
+    expect(Object.fromEntries(productCategories.map((category) => [
+      category,
+      catalogProducts.filter((product) => product.category === category).length,
+    ]))).toEqual({ protein: 6, getraenk: 10, 'low-carb': 3, snack: 6 });
+  });
+});
 
 describe('published product assortment', () => {
   test('passes every publication gate', () => {

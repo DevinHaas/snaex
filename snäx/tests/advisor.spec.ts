@@ -34,7 +34,7 @@ test('keeps each step in the viewport and shows scored products with images', as
   const cards = page.locator('[data-result-product]:visible');
   await expect(cards).toHaveCount(4);
   await expect(cards.locator('img')).toHaveCount(4);
-  await expect(cards.locator('.recommendation-category')).toHaveText(['Getränk', 'Snack', 'Protein', 'Low Carb']);
+  await expect(cards.locator('.recommendation-category')).toHaveText(['Beverage', 'Snack', 'Protein', 'Low Carb']);
   await expect(cards.locator('.fit-score')).toHaveCount(4);
 });
 

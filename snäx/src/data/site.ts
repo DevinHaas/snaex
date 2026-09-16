@@ -106,14 +106,14 @@ export const siteContent: SiteContent = {
       },
       {
         slug: 'kohlenhydrate',
-        name: 'Kohlenhydrate',
+        name: 'Carbohydrates',
         benefit: 'Energie. Fokus. Weiterkommen.',
         description:
           'Liefern schnell verfügbare Energie für den Alltag und deine Aktivität.',
       },
       {
         slug: 'gesunde-fette',
-        name: 'Gesunde Fette',
+        name: 'Healthy Fats',
         benefit: 'Nähren. Ausgleichen. Wohlfühlen.',
         description:
           'Liefern wertvolle Fettsäuren und unterstützen wichtige Körperfunktionen.',

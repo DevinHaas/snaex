@@ -42,12 +42,12 @@ const candidates: Candidate[] = [
     taste: 'sweet',
   },
   {
-    slug: 'rivella-rot',
+    slug: 'vitamin-well-zero-pineapple',
     category: 'getraenk',
     diets: ['omnivore', 'vegetarian'],
-    exclusions: ['milk'],
+    exclusions: [],
     taste: 'sweet',
-    drink: 'sparkling',
+    drink: 'still',
   },
   {
     slug: 'alpahirt-bergsalsiz',

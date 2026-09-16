@@ -3,7 +3,7 @@ import type { ImageMetadata } from 'astro';
 import alpahirtBergsalsiz from '../assets/products/alpahirt-bergsalsiz.webp';
 import darvidaNature from '../assets/products/darvida-nature.webp';
 import kaegiChiefsProteinWafer from '../assets/products/kaegi-chiefs-protein-wafer.webp';
-import rivellaRot from '../assets/products/rivella-rot.webp';
+import vitaminWellZeroPineapple from '../assets/products/vitamin-well-zero-pineapple.webp';
 
 export const productCategories = ['protein', 'getraenk', 'low-carb', 'snack'] as const;
 export type ProductCategory = (typeof productCategories)[number];
@@ -11,7 +11,7 @@ export type ProductStatus = 'candidate' | 'approved' | 'published';
 
 export const productCategoryLabels: Record<ProductCategory, string> = {
   protein: 'Protein',
-  getraenk: 'Getränk',
+  getraenk: 'Beverage',
   'low-carb': 'Low Carb',
   snack: 'Snack',
 };
@@ -78,36 +78,40 @@ export const products: Product[] = [
     imageUsage: 'approved',
   },
   {
-    slug: 'rivella-rot',
-    name: 'Rivella Rot',
+    slug: 'vitamin-well-zero-pineapple',
+    name: 'Vitamin Well Zero Pineapple',
     category: 'getraenk',
     status: 'published',
-    brandCountry: 'CH',
-    producerCountry: 'CH',
-    productionCountry: 'CH',
-    ingredientsSummary: 'Kohlensäurehaltiges Tafelgetränk mit 35 % Milchserum.',
-    factSourceUrl: 'https://www.migros.ch/de/product/120223000000',
-    originSourceUrl: 'https://rivella-group.com/unternehmen/',
+    brandCountry: 'SE',
+    producerCountry: 'SE',
+    productionCountry: 'SE',
+    ingredientsSummary:
+      'Zuckerfreies, stilles Erfrischungsgetränk mit Ananas- und Grapefruitgeschmack, Vitaminen, Mineralstoffen und Süssungsmitteln.',
+    factSourceUrl:
+      'https://www.coop.ch/de/lebensmittel/getraenke/soft-drinks/sport-energydrinks/sportgetraenke/vitamin-well-pineapple-zero/p/7268439',
+    originSourceUrl: 'https://www.vitaminwell.com/about/',
     nutritionClaims: [
       {
-        label: 'Mit 35 % Milchserum',
-        sourceUrl: 'https://www.migros.ch/de/product/120223000000',
+        label: '0 g Zucker pro 100 ml',
+        sourceUrl: 'https://www.vitaminwell.com/product/zero-pineapple/',
       },
     ],
     swissMarketSignals: [
       {
-        label: 'Schweizer Original seit 1952',
-        sourceUrl: 'https://rivella.ch/de/sortiment/rot/',
+        label: 'Schweizer Produktinformationen bei Vitamin Well',
+        sourceUrl: 'https://www.vitaminwell.com/product/zero-pineapple/',
       },
       {
-        label: 'Migros-Sortiment mit Kundenbewertungen',
-        sourceUrl: 'https://www.migros.ch/de/product/120223000000',
+        label: 'Coop-Sortiment mit Kundenbewertungen',
+        sourceUrl:
+          'https://www.coop.ch/de/lebensmittel/getraenke/soft-drinks/sport-energydrinks/sportgetraenke/vitamin-well-pineapple-zero/p/7268439',
       },
     ],
-    image: rivellaRot,
-    imageAlt: 'Flasche Rivella Rot Original',
-    imageSourceUrl: 'https://rivella.ch/wp-content/uploads/2025/02/rivella-rot-1.png',
-    imageOwner: 'Rivella AG',
+    image: vitaminWellZeroPineapple,
+    imageAlt: 'Flasche Vitamin Well Zero Pineapple',
+    imageSourceUrl:
+      'https://media.meds.se/meds/images/image-png-2024-04-23-080955859/0/0/auto/c/7340222800044-png.png',
+    imageOwner: 'Vitamin Well AB',
     imageUsage: 'approved',
   },
   {

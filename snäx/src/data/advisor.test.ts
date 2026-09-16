@@ -20,7 +20,7 @@ describe('snack advisor', () => {
       'darvida-nature',
       'alpahirt-bergsalsiz',
       'kaegi-chiefs-protein-wafer',
-      'rivella-rot',
+      'vitamin-well-zero-pineapple',
     ]);
     expect(result.recommendations.map(({ score }) => score).toSorted((a, b) => b - a)).toEqual(
       result.recommendations.map(({ score }) => score),

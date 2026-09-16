@@ -40,7 +40,7 @@ export interface Product {
 export const products: Product[] = [
   {
     slug: 'kaegi-chiefs-protein-wafer',
-    name: 'Kägi x Chiefs Protein Wafer',
+    name: 'Kägi × Chiefs Protein Wafer Classic Choco',
     category: 'protein',
     status: 'published',
     brandCountry: 'CH',

@@ -37,8 +37,13 @@ test('navigation works by keyboard and native anchors without JavaScript', async
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'Snack-Finder starten' })).toBeFocused();
 
+  await expect(page.locator('nav').getByRole('link', { name: 'Sortiment', exact: true })).toHaveAttribute(
+    'href',
+    '/produkte/',
+  );
+  await expect(page.locator('nav').getByRole('link', { name: 'Produkte', exact: true })).toHaveCount(0);
+
   const destinations = [
-    ['Produkte', 'produkte'],
     ['Kategorien', 'kategorien'],
     ['Philosophie', 'philosophie'],
     ['Unser Team', 'team'],
@@ -54,21 +59,38 @@ test('navigation works by keyboard and native anchors without JavaScript', async
   }
 });
 
-test('offer connects the hero, assortment categories, and contact section', async ({ page }) => {
+test('offer connects the hero, assortment, and contact section', async ({ page }) => {
   await page.goto('/');
 
   await page.getByRole('link', { name: 'Sortiment entdecken' }).click();
   await expect(page).toHaveURL(/#produkte$/);
 
-  const products = page.locator('[data-product-category]');
-  await expect(products).toHaveCount(4);
-  for (const category of ['protein', 'getraenk', 'low-carb', 'snack']) {
-    await expect(page.locator(`[data-product-category="${category}"]`)).toHaveCount(1);
-  }
+  await expect(page.locator('[data-random-product]:visible')).toHaveCount(4);
+  await expect(page.locator('[data-random-product]')).toHaveCount(23);
+  await expect(page.getByRole('heading', { name: 'Alpahirt Bergsalsiz' })).toHaveCount(0);
 
   await page.getByRole('link', { name: 'Snäx anfragen' }).click();
   await expect(page).toHaveURL(/#kontakt$/);
   await expect(page.locator('#kontakt')).toBeInViewport();
+});
+
+test('shows four different assortment products after reload', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'chromium-no-js', 'Random selection requires JavaScript');
+  await page.goto('/');
+
+  const visibleProducts = page.locator('[data-random-product]:visible');
+  await expect(visibleProducts).toHaveCount(4);
+  const firstSelection = await visibleProducts.evaluateAll((products) => (
+    products.map((product) => product.getAttribute('data-product-id'))
+  ));
+
+  await page.reload();
+  await expect(visibleProducts).toHaveCount(4);
+  const secondSelection = await visibleProducts.evaluateAll((products) => (
+    products.map((product) => product.getAttribute('data-product-id'))
+  ));
+
+  expect(secondSelection.filter((product) => firstSelection.includes(product))).toEqual([]);
 });
 
 test('enhances scrolling with Lenis', async ({ page }, testInfo) => {

@@ -23,6 +23,7 @@ const { navigation, linkPrefix = '' } = Astro.props;
   </a>
   <nav aria-label="Hauptnavigation">
     <ul class="nav-list">
+      <li><a href="/produkte/">Sortiment</a></li>
       {navigation.map((item) => (
         <li><a href={`${linkPrefix}${item.href}`}>{item.label}</a></li>
       ))}

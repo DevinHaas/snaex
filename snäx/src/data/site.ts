@@ -74,7 +74,6 @@ export interface SiteContent {
 
 export const siteContent: SiteContent = {
   navigation: [
-    { label: 'Produkte', href: '#produkte' },
     { label: 'Kategorien', href: '#kategorien' },
     { label: 'Philosophie', href: '#philosophie' },
     { label: 'Unser Team', href: '#team' },

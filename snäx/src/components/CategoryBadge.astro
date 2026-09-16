@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+
+import healthyFats from '../assets/categories/gesunde-fette.webp';
+import hydration from '../assets/categories/hydration.webp';
+import energy from '../assets/categories/kohlenhydrate.webp';
+import protein from '../assets/categories/protein.webp';
+import { productCategoryLabels, type ProductCategory } from '../data/products';
+
+interface Props {
+  category: ProductCategory;
+}
+
+const { category } = Astro.props;
+const symbols = { protein, snack: energy, 'low-carb': healthyFats, getraenk: hydration };
+---
+
+<span class="product-category" data-category={category}>
+  <Image
+    class="product-category-symbol"
+    src={symbols[category]}
+    alt=""
+    widths={[28, 56]}
+    sizes="1.75rem"
+    loading="lazy"
+    data-category-symbol={category}
+  />
+  <span>{productCategoryLabels[category]}</span>
+</span>
+
+<style>
+  .product-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+    margin: 0;
+    padding: 0.2rem 0.65rem 0.2rem 0.2rem;
+    color: var(--color-ink);
+    background: var(--category-color);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .product-category[data-category='protein'] { --category-color: #e29b7e; }
+  .product-category[data-category='snack'] { --category-color: #f4d27b; }
+  .product-category[data-category='low-carb'] { --category-color: #a5c6a2; }
+  .product-category[data-category='getraenk'] { --category-color: #9dc4c3; }
+
+  :global(.product-category-symbol) {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex: none;
+  }
+</style>

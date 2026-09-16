@@ -1,18 +1,18 @@
 ---
 import { Image } from 'astro:assets';
 
-import { productCategoryLabels, type Product } from '../data/products';
+import type { CatalogProduct } from '../data/catalog';
+import CategoryBadge from './CategoryBadge.astro';
 
 interface Props {
-  product: Product;
-  index: number;
+  product: CatalogProduct;
 }
 
-const { product, index } = Astro.props;
+const { product } = Astro.props;
 ---
 
 <article class="product-card" data-product-category={product.category} data-motion="product-card">
-  <div class={`product-visual product-visual-${index + 1}`}>
+  <div class="product-visual">
     <Image
       src={product.image}
       alt={product.imageAlt}
@@ -23,15 +23,8 @@ const { product, index } = Astro.props;
     />
   </div>
   <div class="product-copy">
-    <p class="product-category">{productCategoryLabels[product.category]}</p>
+    <CategoryBadge category={product.category} />
     <h3>{product.name}</h3>
-    <p>{product.ingredientsSummary}</p>
-    <ul class="product-facts" aria-label={`Produktmerkmale von ${product.name}`}>
-      {product.nutritionClaims.map((claim) => <li>{claim.label}</li>)}
-    </ul>
-    <div class="product-meta">
-      <a href={product.originSourceUrl} rel="noreferrer">Hergestellt in der Schweiz</a>
-      <a href={product.factSourceUrl} rel="noreferrer">Faktenquelle</a>
-    </div>
+    <p>{product.unit}</p>
   </div>
 </article>

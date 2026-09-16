@@ -1,6 +1,6 @@
 ---
 import type { SiteContent } from '../data/site';
-import { publishedProducts } from '../data/products';
+import { catalogProducts } from '../data/catalog';
 import ProductCard from './ProductCard.astro';
 
 interface Props {
@@ -19,9 +19,41 @@ const { content } = Astro.props;
     </div>
   </div>
 
-  <ul class="product-list" aria-label="Ausgewähltes Snäx Sortiment">
-    {publishedProducts.map((product, index) => (
-      <li><ProductCard product={product} index={index} /></li>
+  <ul class="product-list" aria-label="Ausgewähltes Snäx Sortiment" data-random-products>
+    {catalogProducts.map((product, index) => (
+      <li data-random-product data-product-id={product.name} hidden={index >= 4}>
+        <ProductCard product={product} />
+      </li>
     ))}
   </ul>
 </section>
+
+<script is:inline>
+  const list = document.querySelector('[data-random-products]');
+  const cards = list ? [...list.querySelectorAll('[data-random-product]')] : [];
+
+  if (list && cards.length >= 4) {
+    let previous = [];
+    try {
+      previous = JSON.parse(sessionStorage.getItem('snax-featured-products') ?? '[]');
+    } catch {}
+
+    const pool = cards.filter((card) => !previous.includes(card.dataset.productId));
+    for (let index = pool.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      [pool[index], pool[randomIndex]] = [pool[randomIndex], pool[index]];
+    }
+
+    const selected = pool.slice(0, 4);
+    const selectedCards = new Set(selected);
+    list.replaceChildren(...selected, ...cards.filter((card) => !selectedCards.has(card)));
+    for (const card of cards) card.hidden = !selectedCards.has(card);
+
+    try {
+      sessionStorage.setItem(
+        'snax-featured-products',
+        JSON.stringify(selected.map((card) => card.dataset.productId)),
+      );
+    } catch {}
+  }
+</script>

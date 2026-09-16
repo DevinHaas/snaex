@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 
+import CategoryBadge from '../components/CategoryBadge.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { catalogProducts } from '../data/catalog';
@@ -99,7 +100,7 @@ const productsByCategory = productCategories.map((category) => ({
                       />
                     </div>
                     <div class="catalog-copy">
-                      <p class="product-category">{productCategoryLabels[product.category]}</p>
+                      <CategoryBadge category={product.category} />
                       <h3>{product.name}</h3>
                       <p>{product.unit}</p>
                     </div>

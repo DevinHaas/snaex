@@ -6,18 +6,35 @@ test('opens the full assortment and filters its four categories', async ({ page 
   await expect(page).toHaveURL(/\/produkte\/$/);
   await expect(page.getByRole('heading', { name: 'Finde deinen nächsten Snäx.' })).toBeVisible();
   await expect(page.locator('[data-catalog-group]')).toHaveCount(4);
-  await expect(page.locator('[data-catalog-item]')).toHaveCount(25);
-  await expect(page.locator('[data-catalog-item] img')).toHaveCount(25);
+  await expect(page.locator('[data-catalog-item]')).toHaveCount(23);
+  await expect(page.locator('[data-catalog-item] img')).toHaveCount(23);
 
   if (testInfo.project.name === 'chromium-no-js') return;
 
-  await page.getByRole('searchbox', { name: 'Produkte durchsuchen' }).fill('Rivella');
-  await expect(page.locator('[data-catalog-item]:visible')).toHaveCount(2);
-  await expect(page.getByRole('heading', { name: 'Rivella Rot' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Rivella Blau / Zero' })).toBeVisible();
+  const search = page.getByRole('searchbox', { name: 'Produkte durchsuchen' });
+  const searchBox = () => search.evaluate((element) => {
+    const { x, y, width, height } = element.getBoundingClientRect();
+    return { x, y: y + window.scrollY, width, height };
+  });
+  const initialSearchBox = await searchBox();
 
-  await page.getByRole('searchbox', { name: 'Produkte durchsuchen' }).clear();
-  await page.getByRole('button', { name: /^Snack/ }).click();
+  if ((page.viewportSize()?.width ?? 0) > 672) {
+    const filterRows = await page.locator('[data-category-filter]').evaluateAll((buttons) => (
+      new Set(buttons.map((button) => button.getBoundingClientRect().top)).size
+    ));
+    expect(filterRows).toBe(1);
+  }
+
+  await search.fill('Vitamin Well');
+  await expect(page.locator('[data-catalog-item]:visible')).toHaveCount(1);
+  await expect(page.getByRole('heading', { name: 'Vitamin Well Zero Pineapple' })).toBeVisible();
+
+  await search.clear();
+  await page.getByRole('button', { name: /^Energy/ }).click();
   await expect(page.locator('[data-catalog-item]:visible')).toHaveCount(6);
   await expect(page.getByRole('heading', { name: 'DAR-VIDA Nature' })).toBeVisible();
+
+  await page.getByRole('button', { name: /^Alle/ }).click();
+  await expect(page.locator('[data-catalog-item]:visible')).toHaveCount(23);
+  expect(await searchBox()).toEqual(initialSearchBox);
 });

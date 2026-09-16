@@ -19,7 +19,7 @@ const productsByCategory = productCategories.map((category) => ({
 
 <BaseLayout
   title="Produkte durchsuchen | Snäx"
-  description="Durchsuche das aktuelle Snäx Sortiment und filtere Produkte nach Protein, Getränk, Low Carb oder Snack."
+  description="Durchsuche das aktuelle Snäx Sortiment und filtere Produkte nach Protein, Energy, Healthy Fats oder Hydration."
 >
   <SiteHeader navigation={siteContent.navigation} linkPrefix="/" />
 
@@ -239,6 +239,7 @@ const productsByCategory = productCategories.map((category) => ({
     display: grid;
     grid-column: 2;
     grid-row: 1 / span 2;
+    align-self: stretch;
     gap: 0.65rem;
     min-width: 0;
     margin: 0;
@@ -248,19 +249,21 @@ const productsByCategory = productCategories.map((category) => ({
 
   .filter-list {
     display: flex;
-    flex-wrap: wrap;
+    align-self: end;
+    flex-wrap: nowrap;
     gap: 0.55rem;
   }
 
   .filter-list button {
-    min-height: 3rem;
-    padding: 0.6rem 0.85rem;
+    min-height: 3.5rem;
+    padding: 0.6rem;
     color: var(--color-ink);
     background: transparent;
     border: 1px solid rgb(31 61 42 / 42%);
     border-radius: 999px;
     font-size: 0.9rem;
     font-weight: 800;
+    white-space: nowrap;
     cursor: pointer;
   }
 
@@ -284,6 +287,7 @@ const productsByCategory = productCategories.map((category) => ({
   .catalog-status {
     grid-column: 3;
     grid-row: 1 / span 2;
+    inline-size: 11rem;
     margin: 0 0 0.9rem;
     font-weight: 900;
     white-space: nowrap;
@@ -390,7 +394,7 @@ const productsByCategory = productCategories.map((category) => ({
     display: none !important;
   }
 
-  @media (max-width: 64rem) {
+  @media (max-width: 84rem) {
     .catalog-intro,
     .catalog-controls {
       grid-template-columns: 1fr;
@@ -416,6 +420,10 @@ const productsByCategory = productCategories.map((category) => ({
 
     .catalog-intro {
       align-items: start;
+    }
+
+    .filter-list {
+      flex-wrap: wrap;
     }
 
     .catalog-grid {

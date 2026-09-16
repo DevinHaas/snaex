@@ -1,6 +1,6 @@
 ---
 import type { ContactDetails } from '../data/site';
-import BrandLogo from './BrandLogo.astro';
+import logo from '../assets/brand/logo-light.png';
 
 interface Props {
   contactDetails: ContactDetails;
@@ -13,7 +13,13 @@ const legalLinks = contactDetails.status === 'approved' ? contactDetails.legalLi
 
 <footer class="site-footer">
   <a class="footer-brand" href={`${linkPrefix}#hero`} aria-label="Snäx Startseite">
-    <BrandLogo variant="light" class="footer-logo" />
+    <img
+      src={logo.src}
+      width={logo.width}
+      height={logo.height}
+      class="footer-logo"
+      alt="Snäx – Simply Better Snacking."
+    />
   </a>
   <p>Snäx · Simply Better Snacking.</p>
   <nav aria-label="Fußnavigation">

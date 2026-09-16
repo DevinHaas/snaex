@@ -5,15 +5,15 @@ import darvidaNature from '../assets/products/darvida-nature.webp';
 import kaegiChiefsProteinWafer from '../assets/products/kaegi-chiefs-protein-wafer.webp';
 import vitaminWellZeroPineapple from '../assets/products/vitamin-well-zero-pineapple.webp';
 
-export const productCategories = ['protein', 'getraenk', 'low-carb', 'snack'] as const;
+export const productCategories = ['protein', 'snack', 'low-carb', 'getraenk'] as const;
 export type ProductCategory = (typeof productCategories)[number];
 export type ProductStatus = 'candidate' | 'approved' | 'published';
 
 export const productCategoryLabels: Record<ProductCategory, string> = {
   protein: 'Protein',
-  getraenk: 'Beverage',
-  'low-carb': 'Low Carb',
-  snack: 'Snack',
+  snack: 'Energy',
+  'low-carb': 'Healthy Fats',
+  getraenk: 'Hydration',
 };
 
 export interface Product {

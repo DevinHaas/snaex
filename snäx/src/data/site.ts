@@ -89,7 +89,7 @@ export const siteContent: SiteContent = {
   products: {
     heading: 'Was passt heute zu deiner Pause?',
     intro:
-      'Protein für lange Tage, etwas Kühles gegen den Durst, Low-Carb für zwischendurch und vertraute Schweizer Snacks: bewusst gemischt statt beliebig gefüllt.',
+      'Protein, Energie, gesunde Fette und Hydration: bewusst gemischt statt beliebig gefüllt.',
   },
   categoryGuide: {
     eyebrow: 'Unser Kategoriensystem',

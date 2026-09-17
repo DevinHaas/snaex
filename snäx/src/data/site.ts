@@ -105,7 +105,7 @@ export const siteContent: SiteContent = {
       },
       {
         slug: 'kohlenhydrate',
-        name: 'Carbohydrates',
+        name: 'Energy',
         benefit: 'Energie. Fokus. Weiterkommen.',
         description:
           'Liefern schnell verfügbare Energie für den Alltag und deine Aktivität.',
